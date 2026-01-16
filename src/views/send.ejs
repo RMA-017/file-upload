@@ -13,17 +13,28 @@
     <div class="container">
 
         <h2>Send file</h2>
-        <ul>
-            <li>
-                <a href="/">Home Page</a>
-            </li>
-            <li>
-                <a href="/dashboard">Dashboard</a>
-            </li>
-            <li>
-                <a href="/view">View</a>
-            </li>
-        </ul>
+
+        <% if (file) { %>
+            <p>file yuklandi</p>
+            <img src="<%= user_file %>" alt="img">
+            <% } %>
+
+                <form action="/send" method="post" enctype="multipart/form-data">
+                    <input type="file" name="users_file" accept="image/*, video/*">
+                    <button type="submit">send</button>
+                </form>
+
+                <ul>
+                    <li>
+                        <a href="/">Home Page</a>
+                    </li>
+                    <li>
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="/view">View</a>
+                    </li>
+                </ul>
 
     </div>
 

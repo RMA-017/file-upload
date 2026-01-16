@@ -16,6 +16,10 @@ body {
     align-items: center;
 }
 
+h2 {
+    margin-bottom: 50px;
+}
+
 a {
     text-decoration: none;
     color: azure;
@@ -36,4 +40,20 @@ ul li {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+form {
+    margin-top: 20px;
+    border: 1px solid red;
+    padding: 10px;
+    background-color: rgb(62, 61, 60);
+}
+
+img {
+    width: 100px;
+}
+
+p {
+    margin: 20px;
+    color: aqua;
 }
