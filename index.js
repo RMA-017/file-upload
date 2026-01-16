@@ -4,6 +4,7 @@ import path from "node:path"
 
 const app = express()
 const PORT = process.env.PORT
+
 const storage = multer.diskStorage({
     destination: "uploads/",
     filename: (req, file, cb) => {
@@ -25,11 +26,29 @@ app.get("/", async (req, res) => {
 })
 
 app.get("/send", async (req, res) => {
-    if (req.query.file) {
-        res.render("send", {
-            file: true,
-            user_file: "/uploads/" + req.query.file
-        })
+    if (req.query.fileName) {
+        let typeFormat = (req.query.format).split("/")[0]
+        if (typeFormat === "video") {
+            res.render("send", {
+                file: true,
+                user_file: "/uploads/" + req.query.fileName,
+                format: "video",
+                status: "file yuklandi"
+            })
+        } else if (typeFormat === "image") {
+            res.render("send", {
+                file: true,
+                user_file: "/uploads/" + req.query.fileName,
+                format: "image",
+                status: "file yuklandi"
+            })
+        } else {
+            res.render("send", {
+                file: true,
+                format: "",
+                status: "file formati xato !!!"
+            })
+        }
     } else {
         res.render("send", {
             file: false
@@ -38,7 +57,7 @@ app.get("/send", async (req, res) => {
 })
 
 app.post("/send", upload.single("users_file"), async (req, res) => {
-    res.redirect(`./send?file=${req.file.filename}`)
+    res.redirect(`./send?fileName=${req.file.filename}&format=${req.file.mimetype}`)
 })
 
 app.get("/dashboard", async (req, res) => {
