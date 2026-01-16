@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    background-color: rgb(28, 27, 27);
+    color: antiquewhite;
+    width: 1200px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: azure;
+}
+
+ul {
+    list-style: none;
+    padding: 20px;
+}
+
+ul li {
+    margin: 10px;
+}
+
+.container {
+    width: max-content;
+    height: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
