@@ -13,16 +13,43 @@
     <div class="container">
 
         <h2>View</h2>
+
+        <ul>
+            <% data.forEach(item=> { %>
+                <% let typeFormat=(item.mimetype).split("/")[0] %>
+                    <% if(typeFormat==="image" ) { %>
+                        <li>
+                            <a href="/uploads/<%= item.filename %>" target="_blank">
+                                <img src="/uploads/<%= item.filename %>" alt="img">
+                                <p>
+                                    <%= item.filename %>
+                                </p>
+                            </a>
+                        </li>
+                        <% } %>
+                            <% if(typeFormat==="video" ) { %>
+                                <li>
+                                    <a href="/uploads/<%= item.filename %>" target="_blank">
+                                        <video src="/uploads/<%= item.filename %>""></video>
+                                        <p>
+                                            <%= item.filename %>
+                                        </p>
+                                    </a>
+                                </li>
+                                <% } %>
+                                    <% }) %>
+        </ul>
+
         <ul>
             <li>
-                <a href="/send">Send file</a>
-            </li>
-            <li>
-                <a href="/dashboard">Dashboard</a>
-            </li>
-            <li>
-                <a href="/">Home Page</a>
-            </li>
+                <a href=" /send">Send file</a>
+                                </li>
+                                <li>
+                                    <a href="/dashboard">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="/">Home Page</a>
+                                </li>
         </ul>
 
     </div>

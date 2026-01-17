@@ -1,6 +1,7 @@
 import express from "express"
 import multer from "multer"
-import path from "node:path"
+import path, { format } from "node:path"
+import { promises as fs } from "node:fs"
 
 const app = express()
 const PORT = process.env.PORT
@@ -57,15 +58,36 @@ app.get("/send", async (req, res) => {
 })
 
 app.post("/send", upload.single("users_file"), async (req, res) => {
+    if (!req.file) {
+        return res.render("send", {
+            file: true,
+            status: "file kiritilmadi !!!",
+            format: ""
+        })
+    }
+    let data = JSON.parse(await fs.readFile("./src/json/data.json", "utf8"))
+    let new_data = {
+        fieldname: req.file.fieldname,
+        mimetype: req.file.mimetype,
+        filename: req.file.filename
+    }
+    data.push(new_data)
+    await fs.writeFile("./src/json/data.json", JSON.stringify(data))
     res.redirect(`./send?fileName=${req.file.filename}&format=${req.file.mimetype}`)
 })
 
 app.get("/dashboard", async (req, res) => {
-    res.render("dashboard")
+    let data = JSON.parse(await fs.readFile("./src/json/data.json", "utf8"))
+    res.render("dashboard", {
+        data
+    })
 })
 
 app.get("/view", async (req, res) => {
-    res.render("view")
+    let data = JSON.parse(await fs.readFile("./src/json/data.json", "utf8"))
+    res.render("view", {
+        data
+    })
 })
 
 app.listen(PORT, () => {
